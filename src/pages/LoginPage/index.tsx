@@ -78,7 +78,7 @@ function Login(props: IProps) {
               </Field>
               
              <Field name='remember me'>
-                {({field,meta}: FieldProps) => (
+                {({field,meta}: FieldProps<ILogin['rememberme']>) => (
                     <div className='flex' >
                     <input 
                     type='checkbox' 
@@ -88,7 +88,7 @@ function Login(props: IProps) {
                     className='ml-10' 
                     typo-body-small 
                     text-slate-500>Forgot Password</label>
-                    {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+                    {meta.touched && meta.error ? <div>meta.error</div> : null}
                   </div>
                 )}
              </Field>
