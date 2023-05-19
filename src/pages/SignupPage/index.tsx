@@ -3,7 +3,7 @@ import Card from "../../components/Card";
 import images from "../../assets/images";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import React from "react";
+import React, {useState} from "react";
 import * as Yup from 'yup';
 
 interface IProps {
@@ -24,9 +24,29 @@ function Signup(props: IProps) {
         password: "",
         accountPolicy: false
     }
+    const[error, setError] = useState<string | null>(null);
 
     const onSubmit = (values: ISignUp, helpers: FormikHelpers<ISignUp>) => {
-        console.log(values);
+        setError(null);
+        fetch("http://api/v1/auth/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values)
+            })
+            .then((response)=>{
+                if(!response.ok){
+                    throw new Error("Error occurred during signup");
+                }
+                console.log("Signup successful");
+            })
+            .catch((error)=> {
+                setError(error.message);
+            })
+            .finally(()=>{
+                helpers.setSubmitting(false);
+            });
     }
     const SignupSchema = Yup.object().shape({
         confirmationCode: Yup.string()
