@@ -18,11 +18,13 @@ function RootNavigation(props: IProps) {
         <Route path="/" element={<HomePage/>}/>
 
         <Route element={<AuthLayout/>}>
-            <Route path="/auth" element={<PreAuthPage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/signup" element={<SignupPage/>}/>
+          <Route path="/auth">
+            <Route path="" element={<PreAuthPage/>}/>
+            <Route path="login" element={<LoginPage/>}/>
+            <Route path="signup" element={<SignupPage/>}/>
             <Route path="/reset-password" element={<ResetPasswordPage/>}/>
             <Route path="/new-password" element={<SetNewPasswordPage/>}/>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
