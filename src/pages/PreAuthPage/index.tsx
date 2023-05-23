@@ -14,7 +14,7 @@ function PreAuthPage(props: IProps) {
   }
 
   const initialValue: IPreAuth = {
-    email: "john"
+    email: ""
   }
 
   const onSubmit = (values: IPreAuth, helpers: FormikHelpers<IPreAuth>) => {
