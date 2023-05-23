@@ -8,7 +8,7 @@ import images from "../../assets/images";
 import {InitAuth, NextAuthStep} from "../../types/auth.types";
 import authService from "../../services/auth.service";
 import {useNavigate} from "react-router-dom";
-import toast from "react-hot-toast";
+import utils from "../../utils/utils";
 
 interface IProps {
 }
@@ -34,19 +34,16 @@ function PreAuthPage(props: IProps) {
             }
           })
         } else if (res === NextAuthStep.SIGNUP) {
-          navigate("/auth/signup")
+          navigate("/auth/signup", {
+            state: {
+              email: values.email,
+            }
+          })
         }
         helpers.setSubmitting(false);
       })
       .catch((err) => {
-        if (err.response?.data.data) {
-          helpers.setErrors(err.response.data.data)
-          toast.error(err.response.data.message)
-        } else if (err.response?.data?.message) {
-          toast.error(err.response.data.message)
-        } else {
-          toast.error(err.message)
-        }
+        utils.handleRequestError(err, helpers);
       })
   }
 
@@ -80,7 +77,14 @@ function PreAuthPage(props: IProps) {
               </Field>
 
               <div>
-                <Button className="w-full" variant="PRIMARY">Continue</Button>
+                <Button
+                  className="w-full"
+                  variant="PRIMARY"
+                  loading={isSubmitting}
+                  disabled={!isValid}
+                >
+                  Continue
+                </Button>
               </div>
             </Form>
           )}
