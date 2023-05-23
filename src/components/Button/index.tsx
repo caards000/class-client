@@ -1,11 +1,22 @@
 import React, {ButtonHTMLAttributes, useMemo} from 'react';
+import {Icon} from '@iconify/react';
+import loadingLoop from '@iconify/icons-line-md/loading-loop';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "DEFAULT" | "PRIMARY" | "SUCCESS";
   outline?: boolean;
+  loading?: boolean;
 }
 
-function Button({variant = "DEFAULT", outline, children, className, ...props}: IProps) {
+function Button({
+                  variant = "DEFAULT",
+                  outline,
+                  children,
+                  className,
+                  loading,
+                  disabled,
+                  ...props
+                }: IProps) {
   const variantStyle = useMemo(() => {
     switch (variant) {
       case "DEFAULT":
@@ -31,9 +42,20 @@ function Button({variant = "DEFAULT", outline, children, className, ...props}: I
     }
   }, [variant, outline]);
 
+  const style = useMemo(() => {
+    if (loading || disabled) {
+      return `bg-slate-300 text-white cursor-not-allowed`
+    } else {
+      return variantStyle;
+    }
+  }, [variantStyle, loading, disabled])
+
   return (
-    <button className={`h-11 px-4 rounded typo-subtitle-small apply-transition ${variantStyle} ${className}`} {...props}>
-      {children}
+    <button
+      className={`h-11 px-4 rounded typo-subtitle-small apply-transition flex items-center justify-center ${style} ${className}`}
+      disabled={loading || disabled}
+      {...props}>
+      {loading ? <Icon icon={loadingLoop} width={24} height={24}/> : children}
     </button>
   );
 }

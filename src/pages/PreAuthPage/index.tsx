@@ -1,24 +1,50 @@
 import React from 'react';
 import Card from "../../components/Card";
 import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
+import * as yup from "yup";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import images from "../../assets/images";
+import {InitAuth, NextAuthStep} from "../../types/auth.types";
+import authService from "../../services/auth.service";
+import {useNavigate} from "react-router-dom";
+import utils from "../../utils/utils";
 
 interface IProps {
 }
 
 function PreAuthPage(props: IProps) {
-  interface IPreAuth {
-    email: string;
-  }
+  const navigate = useNavigate();
 
-  const initialValue: IPreAuth = {
+  const validationSchema = yup.object().shape({
+    email: yup.string().email("Invalid email address").required("Email address is required"),
+  });
+
+  const initialValue: InitAuth = {
     email: ""
   }
 
-  const onSubmit = (values: IPreAuth, helpers: FormikHelpers<IPreAuth>) => {
-    console.log(values);
+  const onSubmit = (values: InitAuth, helpers: FormikHelpers<InitAuth>) => {
+    authService.initAuth(values)
+      .then((res) => {
+        if (res === NextAuthStep.LOGIN) {
+          navigate("/auth/login", {
+            state: {
+              email: values.email,
+            }
+          })
+        } else if (res === NextAuthStep.SIGNUP) {
+          navigate("/auth/signup", {
+            state: {
+              email: values.email,
+            }
+          })
+        }
+        helpers.setSubmitting(false);
+      })
+      .catch((err) => {
+        utils.handleRequestError(err, helpers);
+      })
   }
 
   return (
@@ -29,7 +55,12 @@ function PreAuthPage(props: IProps) {
         <p className="typo-body-small text-slate-500">Lorem ipsum dolor sit amet, consectetur
           adipiscing elit in a mass form of form of form</p>
 
-        <Formik initialValues={initialValue} onSubmit={onSubmit}>
+        <Formik
+          initialValues={initialValue}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+          enableReinitialize
+        >
           {({isSubmitting, isValid}) => (
             <Form className="flex flex-col gap-5 mt-10">
               <Field name="email">
@@ -46,7 +77,14 @@ function PreAuthPage(props: IProps) {
               </Field>
 
               <div>
-                <Button className="w-full" variant="PRIMARY">Continue</Button>
+                <Button
+                  className="w-full"
+                  variant="PRIMARY"
+                  loading={isSubmitting}
+                  disabled={!isValid}
+                >
+                  Continue
+                </Button>
               </div>
             </Form>
           )}

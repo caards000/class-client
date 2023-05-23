@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply typo-body;
+  }
+
+  a {
+    @apply text-primary-normal;
+  }
+
   h1 {
     @apply typo-h1;
   }
@@ -129,6 +137,10 @@
 
     &.error {
       @apply text-red-500 border-red-500 bg-red-50 hover:border-red-700 focus:border-red-500 focus:ring-red-300;
+    }
+
+    &.disabled {
+      @apply text-slate-500;
     }
   }
 }
