@@ -95,7 +95,14 @@ function SetNewPasswordPage(props: IProps) {
                             </Field>
 
                             <div>
-                                <Button className="w-full" variant="PRIMARY" loading={isSubmitting}>Reset Password</Button>
+                                <Button
+                                    className="w-full"
+                                    variant="PRIMARY"
+                                    loading={isSubmitting}
+                                    disabled={!isValid}
+                                >
+                                    Reset Password
+                                </Button>
                             </div>
 
 

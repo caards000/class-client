@@ -6,7 +6,6 @@ export enum NextAuthStep {
 export type InitAuth = {
   email: string
 }
-
 export interface ISignUpRequest {
   email: string;
   token: string;
