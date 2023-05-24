@@ -5,11 +5,17 @@ import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import * as yup from "yup"
+import {ISetNewPassword} from "../../types/auth.types";
+import authService from "../../services/auth.service";
+import utils from "../../utils/utils";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 interface IProps {
 }
 
 function SetNewPasswordPage(props: IProps) {
+    const navigate = useNavigate();
+    const[searchParams] = useSearchParams();
 
     const validationSchema = yup.object().shape({
         password: yup.string()
@@ -17,22 +23,33 @@ function SetNewPasswordPage(props: IProps) {
             .max(30, "Password must not exceed 30 characters")
             .required("Required *"),
         passwordConfirmation: yup.string()
-            .test("equalToPassword", "Password Mismatch", (value, context) =>{
+            .test("equalToPassword",
+                "Password Mismatch",
+                (value, context) =>{
                 return value === context.parent.password;
             })
     })
-    interface IPreAuth{
-        password: string;
-        passwordConfirmation: string;
-    }
 
-    const initialValue: IPreAuth = {
+    const token = searchParams.get("token");
+    console.log(token);
+
+    const initialValue: ISetNewPassword = {
         password: "",
-        passwordConfirmation: ""
+        passwordConfirmation: "",
+        token: "",
     }
 
-    const onSubmit = (values: IPreAuth, helpers: FormikHelpers<IPreAuth>) => {
-        console.log(values);
+    const onSubmit = (values: ISetNewPassword, helpers: FormikHelpers<ISetNewPassword>) => {
+        const { passwordConfirmation, ...data } = values;
+        data.token = searchParams.get("token");
+        authService.setNewPassword(data)
+            .then((res) => {
+                navigate("/auth")
+            })
+            .catch((err) => {
+                utils.handleRequestError(err, helpers);
+            });
+        console.log(data)
     }
     return(
         <>
@@ -78,7 +95,7 @@ function SetNewPasswordPage(props: IProps) {
                             </Field>
 
                             <div>
-                                <Button className="w-full" variant="PRIMARY">Reset Password</Button>
+                                <Button className="w-full" variant="PRIMARY" loading={isSubmitting}>Reset Password</Button>
                             </div>
 
 

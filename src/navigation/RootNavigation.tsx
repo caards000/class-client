@@ -22,8 +22,8 @@ function RootNavigation(props: IProps) {
             <Route path="" element={<PreAuthPage/>}/>
             <Route path="login" element={<LoginPage/>}/>
             <Route path="signup" element={<SignupPage/>}/>
-            <Route path="/reset-password" element={<ResetPasswordPage/>}/>
-            <Route path="/new-password" element={<SetNewPasswordPage/>}/>
+            <Route path="reset-password" element={<ResetPasswordPage/>}/>
+            <Route path="new-password" element={<SetNewPasswordPage/>}/>
           </Route>
         </Route>
       </Routes>

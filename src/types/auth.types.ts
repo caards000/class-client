@@ -13,13 +13,20 @@ export interface ISignUpRequest {
   fullName: string;
   password: string
 }
-
 export interface ILoginRequest {
   email: string;
   password: string
 }
-
+export interface IResetPasswordRequest{
+  email:string;
+}
+export interface ISetNewPassword{
+  password: string;
+  passwordConfirmation: string;
+  token: string | null;
+}
 export interface ITokenResponse {
   accessToken: string;
   refreshToken: string;
 }
+

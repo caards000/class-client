@@ -4,28 +4,37 @@ import React from "react";
 import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import * as yup from "yup";
+import {ILoginRequest, IResetPasswordRequest} from "../../types/auth.types";
+import authService from "../../services/auth.service";
+import utils from "../../utils/utils";
 
 interface IProps {
 }
 
 function ResetPasswordPage(props: IProps) {
+    const navigate = useNavigate();
 
     const validationSchema = yup.object().shape({
         email: yup.string().email("Invalid email").required("Required *")
     })
-    interface IPreAuth {
-        email: string;
-    }
 
-    const initialValue: IPreAuth = {
+
+    const initialValue: IResetPasswordRequest ={
         email: ""
     }
 
-    const onSubmit = (values: IPreAuth, helpers: FormikHelpers<IPreAuth>) => {
-        console.log(values);
+    const onSubmit = (values: IResetPasswordRequest, helpers: FormikHelpers<IResetPasswordRequest>) => {
+        authService.resetPassword(values)
+            .then((res) => {
+                navigate("/")
+            })
+            .catch((err) => {
+                utils.handleRequestError(err, helpers);
+            });
     }
+
     return(
         <>
             <Card className="w-[400px]">
@@ -55,11 +64,11 @@ function ResetPasswordPage(props: IProps) {
                             </Field>
 
                             <div>
-                                <Button className="w-full" variant="PRIMARY">Reset Password</Button>
+                                <Button className="w-full" variant="PRIMARY" loading={isSubmitting}>Reset Password</Button>
                             </div>
 
                             <p className="text-center">Remember your password?
-                                <Link to="/login" className="m-1 text-blue-500 underline">Login</Link>
+                                <Link to="/auth/login" className="m-1 text-blue-500 underline">Login</Link>
                             </p>
                         </Form>
                     )}
