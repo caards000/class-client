@@ -1,6 +1,6 @@
 import Card from "../../components/Card";
 import images from "../../assets/images";
-import React from "react";
+import React, { useState } from "react";
 import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -9,6 +9,7 @@ import {ISetNewPassword} from "../../types/auth.types";
 import authService from "../../services/auth.service";
 import utils from "../../utils/utils";
 import {useNavigate, useSearchParams} from "react-router-dom";
+import {RiEyeFill, RiEyeOffFill} from "react-icons/ri";
 
 interface IProps {
 }
@@ -30,8 +31,6 @@ function SetNewPasswordPage(props: IProps) {
             })
     })
 
-    const token = searchParams.get("token");
-    console.log(token);
 
     const initialValue: ISetNewPassword = {
         password: "",
@@ -49,8 +48,10 @@ function SetNewPasswordPage(props: IProps) {
             .catch((err) => {
                 utils.handleRequestError(err, helpers);
             });
-        console.log(data)
     }
+
+    const [showPassword, setShowPassword] = useState(false);
+
     return(
         <>
             <Card className="w-[400px]">
@@ -71,11 +72,23 @@ function SetNewPasswordPage(props: IProps) {
                                     <div>
                                         <Input
                                             label="Enter new password"
-                                            type="password"
+                                            type={showPassword ? "text" : "password"}
                                             placeholder="New Password"
                                             error={meta.touched && meta.error ? meta.error : ""}
                                             {...field}
                                         />
+                                        <div
+                                            className ="absolute top-0 right-10 pb-3 flex items-center h-full"
+                                            onClick={()=>(setShowPassword(!showPassword))}
+                                        >
+                                            <div className="cursor-pointer">
+                                                {showPassword ?(
+                                                    <RiEyeOffFill className="text-gray-400"/>
+                                                ):(
+                                                    <RiEyeFill className="text-gray-400"/>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
                             </Field>
@@ -104,8 +117,6 @@ function SetNewPasswordPage(props: IProps) {
                                     Reset Password
                                 </Button>
                             </div>
-
-
                         </Form>
                     )}
                 </Formik>

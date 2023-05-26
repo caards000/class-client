@@ -16,11 +16,9 @@ function Input({label, error, className, disabled, ...props}: IProps) {
           disabled={disabled}
           {...props}
         />
-        {
-          !isEmpty(error) && (
-            <p className="text-red-500 typo-caption">{error}</p>
-          )
-        }
+          {!isEmpty(error) && (
+              <p className="text-red-500 typo-caption">{error}</p>
+          )}
       </label>
     </div>
   );
