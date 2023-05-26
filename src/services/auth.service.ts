@@ -1,9 +1,12 @@
 import {
     ILoginRequest,
-    InitAuth, IResetPasswordRequest, ISetNewPassword,
+    InitAuth, 
+    IResetPasswordRequest, 
+    ISetNewPassword,
     ISignUpRequest,
     ITokenResponse,
     NextAuthStep
+
 } from "../types/auth.types";
 import apiInstance, {setAuthToken} from "./api";
 import {AxiosResponse} from "axios";
