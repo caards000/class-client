@@ -1,7 +1,11 @@
 import {
     ILoginRequest,
-    InitAuth, IResetPasswordRequest, IResetPasswordResponse, ISetNewPassword, ISetNewPasswordResponse,
+    InitAuth,
+    IResetPasswordRequest,
+    IResetPasswordResponse,
     ISignUpRequest,
+    ISetNewPassword,
+    ISetNewPasswordResponse,
     ITokenResponse,
     NextAuthStep
 } from "../types/auth.types";

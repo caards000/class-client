@@ -18,7 +18,7 @@ function Input({label, error, className, disabled, type:inputType, ...props}: IP
   return (
     <div>
       <label>
-        {label && <p className="text-slate-700 typo-body-small mb-1">{label}</p>}
+        {label && <p className="text-slate-700 typo-body-small mb-1">{label}</p>} 
           <div className="relative flex">
             <input
               className={`input ${!isEmpty(error) ? `error` : ``} ${disabled ? "disabled" : ""} ${className} ${inputType === "password"? "pr-10" : ""}`}
@@ -45,6 +45,7 @@ function Input({label, error, className, disabled, type:inputType, ...props}: IP
           {!isEmpty(error) && (
               <p className="text-red-500 typo-caption">{error}</p>
           )}
+
       </label>
     </div>
   );
