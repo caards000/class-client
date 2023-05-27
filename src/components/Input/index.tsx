@@ -28,8 +28,8 @@ function Input({label, error, className, disabled, type:inputType, ...props}: IP
             />
               {
                   inputType === "password" && (
-                      <button
-                          type="button"
+                      <div
+                          // type="button"
                           className ="absolute px-3 right-0 place-self-center"
                           onClick={togglePassword}
                       >
@@ -38,7 +38,7 @@ function Input({label, error, className, disabled, type:inputType, ...props}: IP
                           ):(
                               <RiEyeFill className="text-gray-400"/>
                           )}
-                      </button>
+                      </div>
                   )
               }
           </div>

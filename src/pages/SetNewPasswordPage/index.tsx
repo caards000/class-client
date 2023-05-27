@@ -33,12 +33,12 @@ function SetNewPasswordPage(props: IProps) {
     const initialValue: ISetNewPassword = {
         password: "",
         passwordConfirmation: "",
-        token: "",
+        token: searchParams.get("token")
     }
 
     const onSubmit = (values: ISetNewPassword, helpers: FormikHelpers<ISetNewPassword>) => {
         const { passwordConfirmation, ...data } = values;
-        data.token = searchParams.get("token");
+        // data.token = searchParams.get("token");
         authService.setNewPassword(data)
             .then((res) => {
                 navigate("/auth")

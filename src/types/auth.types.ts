@@ -28,4 +28,9 @@ export interface ITokenResponse {
   accessToken: string;
   refreshToken: string;
 }
-
+export interface IResetPasswordResponse{
+  message: string;
+}
+export interface ISetNewPasswordResponse{
+  message: string;
+}

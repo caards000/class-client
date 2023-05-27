@@ -1,6 +1,6 @@
 import {
     ILoginRequest,
-    InitAuth, IResetPasswordRequest, ISetNewPassword,
+    InitAuth, IResetPasswordRequest, IResetPasswordResponse, ISetNewPassword, ISetNewPasswordResponse,
     ISignUpRequest,
     ITokenResponse,
     NextAuthStep
@@ -53,10 +53,10 @@ class AuthService {
     });
   }
 
-  public async resetPassword(data: IResetPasswordRequest): Promise<ITokenResponse> {
+  public async resetPassword(data: IResetPasswordRequest): Promise<IResetPasswordResponse> {
     return new Promise((resolve, reject) => {
       apiInstance.post("/auth/reset-password", data)
-          .then((response: AxiosResponse<ITokenResponse>) => {
+          .then((response: AxiosResponse<IResetPasswordResponse>) => {
                 return resolve(response.data);
               }
           )
@@ -66,10 +66,10 @@ class AuthService {
     });
   }
 
-    public async setNewPassword(data: Omit<ISetNewPassword, "passwordConfirmation">): Promise<ITokenResponse> {
+    public async setNewPassword(data: Omit<ISetNewPassword, "passwordConfirmation">): Promise<ISetNewPasswordResponse> {
         return new Promise((resolve, reject) => {
             apiInstance.post("/auth/new-password", data)
-                .then((response: AxiosResponse<ITokenResponse>) => {
+                .then((response: AxiosResponse<ISetNewPasswordResponse>) => {
                         return resolve(response.data);
                     }
                 )
