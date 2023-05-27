@@ -12,9 +12,7 @@ function AuthLayout(props: IProps) {
             <div className="flex gap-x-32 min-h-screen justify-items-center">
                 <div className="max-w-full bg-primary-normal"></div>
                 <div className="flex min-h-full flex-col items-center justify-center">
-
                     <Outlet/>
-
                 </div>
             </div>
         </div>
