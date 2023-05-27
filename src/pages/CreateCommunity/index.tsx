@@ -4,17 +4,14 @@ import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import * as yup from "yup";
+import {ICreateCommunity, ISignUpRequest} from "../../types/auth.types";
+import authService from "../../services/auth.service";
+import utils from "../../utils/utils";
 
 interface IProps {
 }
 
 function CreateCommunity(props: IProps) {
-    interface ICreateCommunity {
-        name: string;
-        description: string;
-        category: string;
-    }
-
     const initialValue: ICreateCommunity = {
         name: "",
         description: "",
@@ -40,6 +37,16 @@ function CreateCommunity(props: IProps) {
     const onSubmit = (values: ICreateCommunity, helpers: FormikHelpers<ICreateCommunity>) => {
         console.log(values);
     }
+
+    // const onSubmit = (values: ICreateCommunity, helpers: FormikHelpers<ICreateCommunity>) => {
+    //     authService.signup(values)
+    //   .then((res) => {
+    //     navigate("/")
+    //   })
+    //   .catch((err) => {
+    //     utils.handleRequestError(err, helpers);
+    //   });
+    // }
 
     return (
         <div>
