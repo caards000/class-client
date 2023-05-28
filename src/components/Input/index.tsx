@@ -29,7 +29,6 @@ function Input({label, error, className, disabled, type:inputType, ...props}: IP
               {
                   inputType === "password" && (
                       <div
-                          // type="button"
                           className ="absolute px-3 right-0 place-self-center"
                           onClick={togglePassword}
                       >
