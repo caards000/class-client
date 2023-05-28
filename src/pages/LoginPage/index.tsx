@@ -96,7 +96,7 @@ function Login(props: IProps) {
 
               <div>
                 <p>
-                  <Link to="/auth/forgot-password" className="typo-body-small">Forgot
+                  <Link to="/auth/reset-password" className="typo-body-small">Forgot
                     password?</Link>
                 </p>
               </div>

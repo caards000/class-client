@@ -19,7 +19,22 @@ export interface ILoginRequest {
   password: string
 }
 
+export interface IResetPasswordRequest{
+  email:string;
+}
+export interface ISetNewPassword{
+  password: string;
+  passwordConfirmation: string;
+  token: string | null;
+}
+
 export interface ITokenResponse {
   accessToken: string;
   refreshToken: string;
+}
+export interface IResetPasswordResponse{
+  message: string;
+}
+export interface ISetNewPasswordResponse{
+  message: string;
 }
