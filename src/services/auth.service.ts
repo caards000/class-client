@@ -65,7 +65,7 @@ class AuthService {
 
   private performLogin(tokens: ITokenResponse) {
     store.dispatch(authActions.login(tokens));
-    setAuthToken(tokens.accessToken);
+    setAuthToken(tokens?.accessToken);
   }
 }
 

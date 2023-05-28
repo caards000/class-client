@@ -19,7 +19,7 @@ function RootNavigation(props: IProps) {
           <Route path="/auth">
             <Route path="" element={<PreAuthPage/>}/>
             <Route path="login" element={<LoginPage/>}/>
-            <Route path="signup" element={<SignupPage/>}/>
+            <Route path="SignupPage" element={<SignupPage/>}/>
           </Route>
         </Route>
       </Routes>
