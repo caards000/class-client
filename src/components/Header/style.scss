@@ -1,0 +1,39 @@
+//.dropdown {
+//    position: relative;
+//    margin-left: 10px; /* Add margin as per your preference */
+//}
+//
+//.dropdown-btn {
+//    display: flex;
+//    align-items: center;
+//    background: none;
+//    border: none;
+//    cursor: pointer;
+//}
+//
+//.dropdown-description {
+//    margin-left: 5px; /* Add margin as per your preference */
+//}
+//
+//.dropdown-content {
+//    position: absolute;
+//    top: 100%; /* Position the content below the button */
+//    right: 0; /* Align the content to the right */
+//    background-color: white;
+//    border: 1px solid #ccc;
+//    padding: 10px;
+//    z-index: 1;
+//    /* Additional styles as per your dropdown content requirements */
+//}
+
+.custom-width {
+  width: 1200px;
+  height: 100px;
+  position: relative;
+ bottom: 100px;
+  //right: 100px;
+}
+.flex-justify-between::before,
+.flex-justify-between::after {
+  display: none !important;
+}
