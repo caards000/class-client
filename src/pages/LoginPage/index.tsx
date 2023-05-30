@@ -14,7 +14,7 @@ import {ILoginRequest} from "../../types/auth.types";
 interface IProps {
 }
 
-function Login(props: IProps) {
+function LoginPage(props: IProps) {
   const params = useLocation();
   const navigate = useNavigate();
 
@@ -126,4 +126,4 @@ function Login(props: IProps) {
   );
 }
 
-export default Login;
+export default LoginPage;

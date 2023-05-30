@@ -7,6 +7,7 @@ import AuthLayout from "../components/Layout/AuthLayout";
 import SignupPage from "../pages/SignupPage";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import SetNewPasswordPage from "../pages/SetNewPasswordPage";
+import Post from "../components/Post";
 
 interface IProps {
 }
@@ -16,7 +17,6 @@ function RootNavigation(props: IProps) {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
-
         <Route element={<AuthLayout/>}>
           <Route path="/auth">
             <Route path="" element={<PreAuthPage/>}/>
