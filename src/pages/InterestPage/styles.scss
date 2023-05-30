@@ -1,0 +1,55 @@
+/**{*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*}*/
+.interest-container{
+    width: 1600px;
+    background-color: white;
+    margin-bottom: 200px;
+}
+
+.interest-item {
+    display: inline-block;
+    padding: 8px;
+    width: 300px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.interest-label {
+    background-color: #ECECEC;
+    padding: 5px;
+    height: 80px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.text{
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    bottom: 70px;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.text-button{
+    margin-right: 110px;
+    border: 1px solid #ECECEC;
+    height: 70px;
+    width: 150px;
+    background-color:#ECECEC ;
+}
+.checkbox{
+    height: 50px;
+    width: 50px;
+    margin-top: 10px;
+}
+//interests{
+//
+//}
+
