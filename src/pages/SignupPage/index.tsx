@@ -20,10 +20,10 @@ function Signup(props: IProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isEmpty(params.state.email)) {
+    if (isEmpty(params?.state?.email)) {
       navigate("/auth");
     }
-  }, [navigate, params.state.email]);
+  }, [navigate, params?.state?.email]);
 
   const SignupSchema = Yup.object().shape({
     token: Yup.string()
@@ -44,7 +44,7 @@ function Signup(props: IProps) {
   });
 
   const initialValue: ISignUpRequest = {
-    email: params.state.email,
+    email: params?.state?.email,
     token: "",
     fullName: "",
     password: "",
@@ -67,7 +67,7 @@ function Signup(props: IProps) {
         <h4>Sign Up</h4>
         <p className="typo-body-small text-slate-500">
           A confirmation code has been sent to <span
-          className="text-primary-normal underline">{params.state.email}</span>, use code to
+          className="text-primary-normal underline">{params?.state?.email}</span>, use code to
           proceed with
           registration.
         </p>

@@ -8,21 +8,21 @@ import SignupPage from "../pages/SignupPage";
 import CreateCommunity from "../pages/CreateCommunity";
 import CommunityLayout from "../components/Layout/CommunityLayout";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
-import SetNewPasswordPage from "../pages/SetNewPasswordPage"
-
+import SetNewPasswordPage from "../pages/SetNewPasswordPage";
+import Post from "../components/Post";
 
 interface IProps {
 }
 
 function RootNavigation(props: IProps) {
-    return (
+    const interests = ['Software engineering', 'front-end', 'back-end', 'cloud', 'python', 'javascript', 'fullstack', 'datascience', 'web-dev', 'dev-ops', 'maths', 'english', 'further-maths', 'science', 'tech'];
+  return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePage/>}/>
                 <Route element={<CommunityLayout/>}>
                     <Route path="/create" element={<CreateCommunity/>}/>
                 </Route>
-
                 <Route element={<AuthLayout/>}>
                     <Route path="/auth">
                         <Route path="" element={<PreAuthPage/>}/>
