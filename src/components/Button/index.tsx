@@ -1,15 +1,17 @@
-  import React, {ButtonHTMLAttributes, useMemo} from 'react';
+import React, {ButtonHTMLAttributes, useMemo} from 'react';
 import {Icon} from '@iconify/react';
 import loadingLoop from '@iconify/icons-line-md/loading-loop';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "DEFAULT" | "PRIMARY" | "SUCCESS";
+  variant?: "DEFAULT" | "PRIMARY" | "SUCCESS" | "GHOST" | "DANGER";
+  size?: "SMALL" | "DEFAULT"
   outline?: boolean;
   loading?: boolean;
 }
 
 function Button({
                   variant = "DEFAULT",
+                  size = "DEFAULT",
                   outline,
                   children,
                   className,
@@ -39,20 +41,40 @@ function Button({
         } else {
           return `bg-green-600 hover:bg-green-500 active:bg-green-700 focus:ring focus:ring-green-200 text-white`;
         }
+
+      case "DANGER":
+        if (outline) {
+          return `border border-2 border-red-600 hover:bg-red-600 hover:text-white active:bg-red-500 focus:ring focus:ring-red-200 text-red-600`;
+        } else {
+          return `bg-red-600 hover:bg-red-500 active:bg-red-700 focus:ring focus:ring-red-200 text-white`;
+        }
+
+      case "GHOST":
+        return "hover:bg-slate-100";
     }
   }, [variant, outline]);
+
+  const sizeStyle = useMemo(() => {
+    switch (size) {
+      case "SMALL":
+        return "h-8 px-4";
+
+      default:
+        return "h-11 px-4";
+    }
+  }, [size])
 
   const style = useMemo(() => {
     if (loading || disabled) {
       return `bg-slate-300 text-white cursor-not-allowed`
     } else {
-      return variantStyle;
+      return `${variantStyle}`;
     }
-  }, [variantStyle, loading, disabled])
+  }, [loading, disabled, variantStyle])
 
   return (
     <button
-      className={`h-11 px-4 rounded typo-subtitle-small apply-transition flex items-center justify-center ${style} ${className}`}
+      className={`rounded typo-subtitle-small apply-transition flex items-center justify-center gap-1 ${sizeStyle} ${style} ${className}`}
       disabled={loading || disabled}
       {...props}>
       {loading ? <Icon icon={loadingLoop} width={24} height={24}/> : children}

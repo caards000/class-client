@@ -2,12 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+body > div.ck-body-wrapper, .ck.ck-editor__top {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.ck.ck-editor__main > .ck.ck-content {
+  border-top-left-radius: var(--ck-border-radius) !important;
+  border-top-right-radius: var(--ck-border-radius) !important;
+  box-shadow: unset !important;
+}
+
+:root {
+  --ck-color-focus-border: #3335d8 !important;
+  --ck-color-button-on-color: #3335d8 !important;
+  --ck-color-button-on-background: #3335d811 !important;
+  --ck-border-radius: 4px !important;
+}
+
 @layer base {
   html {
     @apply typo-body;
   }
 
-  a {
+
+  a:not(.link-reset) {
     @apply text-primary-normal;
   }
 

@@ -1,18 +1,19 @@
 import {
-    ILoginRequest,
-    InitAuth,
-    IResetPasswordRequest,
-    IResetPasswordResponse,
-    ISignUpRequest,
-    ISetNewPassword,
-    ISetNewPasswordResponse,
-    ITokenResponse,
-    NextAuthStep
+  ILoginRequest,
+  InitAuth,
+  IResetPasswordRequest,
+  IResetPasswordResponse,
+  ISetNewPassword,
+  ISetNewPasswordResponse,
+  ISignUpRequest,
+  ITokenResponse,
+  NextAuthStep
 } from "../types/auth.types";
 import apiInstance, {setAuthToken} from "./api";
 import {AxiosResponse} from "axios";
 import store from "../redux/store";
 import {authActions} from "../redux/slices/authSlice";
+import communityService from "./community.service";
 
 class AuthService {
   public async initAuth(data: InitAuth): Promise<NextAuthStep> {
@@ -60,28 +61,28 @@ class AuthService {
   public async resetPassword(data: IResetPasswordRequest): Promise<IResetPasswordResponse> {
     return new Promise((resolve, reject) => {
       apiInstance.post("/auth/reset-password", data)
-          .then((response: AxiosResponse<IResetPasswordResponse>) => {
-                return resolve(response.data);
-              }
-          )
-          .catch((err) => {
-            return reject(err);
-          });
+        .then((response: AxiosResponse<IResetPasswordResponse>) => {
+            return resolve(response.data);
+          }
+        )
+        .catch((err) => {
+          return reject(err);
+        });
     });
   }
 
-    public async setNewPassword(data: Omit<ISetNewPassword, "passwordConfirmation">): Promise<ISetNewPasswordResponse> {
-        return new Promise((resolve, reject) => {
-            apiInstance.post("/auth/new-password", data)
-                .then((response: AxiosResponse<ISetNewPasswordResponse>) => {
-                        return resolve(response.data);
-                    }
-                )
-                .catch((err) => {
-                    return reject(err);
-                });
+  public async setNewPassword(data: Omit<ISetNewPassword, "passwordConfirmation">): Promise<ISetNewPasswordResponse> {
+    return new Promise((resolve, reject) => {
+      apiInstance.post("/auth/new-password", data)
+        .then((response: AxiosResponse<ISetNewPasswordResponse>) => {
+            return resolve(response.data);
+          }
+        )
+        .catch((err) => {
+          return reject(err);
         });
-    }
+    });
+  }
 
   public logout() {
     store.dispatch(authActions.logout());
@@ -94,8 +95,15 @@ class AuthService {
   }
 
   private performLogin(tokens: ITokenResponse) {
-    store.dispatch(authActions.login(tokens));
-    setAuthToken(tokens?.accessToken);
+    if (tokens?.accessToken) {
+      store.dispatch(authActions.login(tokens));
+      setAuthToken(tokens?.accessToken ? `Bearer ${tokens?.accessToken}` : undefined);
+
+      // init actions
+      communityService.getUserCommunities();
+    } else {
+      this.logout();
+    }
   }
 }
 

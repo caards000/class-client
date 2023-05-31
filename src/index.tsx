@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
+import 'react-loading-skeleton/dist/skeleton.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Post from "./components/Post";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

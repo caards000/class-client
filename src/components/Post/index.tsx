@@ -40,18 +40,18 @@ function Post(props: IProps) {
     };
 
     return (
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center">
                 <div className="w-12 h-12 rounded-full overflow-hidden mr-5">
                     <img className="w-full h-full object-cover" src={profileImage} alt="" />
                 </div>
-                <div className="max-w-screen-sm">
+                <div className="flex-1">
                     <div>
-                        <p>
+                        <p className="typo-body text-slate-800">
                             <span className="font-bold mr-1">Saheed Ajayi</span>
                             <span>@saheedajayi</span>
                             <span> &middot; 5h</span>
                         </p>
-                        <p>
+                        <p className="text-slate-600 mt-2">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             At cumque, enim eveniet labore nam officiis repellendus?
                             Ab at culpa illo ipsa, neque odio omnis, quae quibusdam reprehenderit rerum,
@@ -60,7 +60,7 @@ function Post(props: IProps) {
                     </div>
                     <div>
                         <img
-                            className="w-full h-68 object-cover mt-3 mb-3 rounded-2xl"
+                            className="w-full aspect-video object-cover object-center mt-3 mb-3 rounded-md"
                             src={postImage}
                             alt=""
                         />
