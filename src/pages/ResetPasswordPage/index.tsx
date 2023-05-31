@@ -68,7 +68,7 @@ function ResetPasswordPage(props: IProps) {
                             </div>
 
                             <p className="text-center">Remember your password?
-                                <Link to="/auth/login" className="m-1 text-blue-500 underline">Login</Link>
+                                <Link to="/auth/login" className="m-1 text-blue-500 underline cursor-pointer">Login</Link>
                             </p>
                         </Form>
                     )}
