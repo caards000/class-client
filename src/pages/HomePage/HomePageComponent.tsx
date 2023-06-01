@@ -20,7 +20,7 @@ function HomePageComponent(props: IProps) {
                 <>
                   {index !== 0 &&
                       <div key={`${index}-divider`} className="w-full h-[1px] bg-slate-200"/>}
-                  <Post key={index}/>
+                  {/*<Post key={index}/>*/}
                 </>
               ))
             }

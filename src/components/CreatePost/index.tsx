@@ -6,19 +6,36 @@ import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
 import Button from "../Button";
 import {CreatePostType} from "../../types/post.types";
 import viewToPlainText from '@ckeditor/ckeditor5-clipboard/src/utils/viewtoplaintext';
+import {useAppDispatch} from "../../redux/hooks";
+import postService from "../../services/post.service";
+import {activeGroupActions} from "../../redux/slices/activeGroupSlice";
+import utils from "../../utils/utils";
 
 interface IProps {
+  groupId: number;
+  replyId?: number;
 }
 
-function CreatePost(props: IProps) {
+function CreatePost({groupId, replyId}: IProps) {
+  const dispatch = useAppDispatch();
   const initialValue: CreatePostType = {
-    group: 1,
+    groupId: groupId,
+    replyId: replyId,
     content: "",
     plainText: "",
   }
 
   const onSubmit = (value: CreatePostType, helpers: FormikHelpers<CreatePostType>) => {
-    console.log(value)
+    const {plainText, ...data} = value;
+    postService.createPost(data)
+      .then(post => {
+        helpers.setSubmitting(false);
+        helpers.resetForm();
+        dispatch(activeGroupActions.addPost(post))
+      })
+      .catch((err) => {
+        utils.handleRequestError(err, helpers)
+      });
   }
 
   return (
@@ -31,7 +48,7 @@ function CreatePost(props: IProps) {
                 <div>
                   <CKEditor
                     editor={Editor}
-                    config={{placeholder: "Say something..."}}
+                    config={{placeholder: "Share something..."}}
                     data={field.value}
                     disabled={isSubmitting}
                     onChange={(e, editor) => {

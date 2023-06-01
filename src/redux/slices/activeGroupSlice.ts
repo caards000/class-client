@@ -1,17 +1,22 @@
 import {GroupType} from "../../types/group.types";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {EmptyPage, PageType} from "../../types/page.types";
+import {PostType} from "../../types/post.types";
 
 export interface IActiveGroupSlice {
   isLoading: boolean;
   isLoaded: boolean;
   data?: GroupType;
   isMember?: boolean;
+  posts: PageType<PostType>;
 }
 
 const initialState: IActiveGroupSlice = {
   isLoading: true,
   isLoaded: false,
-  data: undefined
+  data: undefined,
+  isMember: false,
+  posts: EmptyPage,
 }
 
 const activeGroupSlice = createSlice({
@@ -31,6 +36,21 @@ const activeGroupSlice = createSlice({
     setIsMember: (state, action: PayloadAction<boolean>) => {
       state.isMember = action.payload;
     },
+    setPosts: (state, action: PayloadAction<PageType<PostType>>) => {
+      state.posts = {
+        ...action.payload,
+        content: [...state.posts.content, ...action.payload.content],
+      }
+    },
+    addPost: (state, action: PayloadAction<PostType>) => {
+      state.posts = {
+        totalElements: state.posts.totalElements + 1,
+        totalPages: state.posts.totalPages || 1,
+        pageNumber: 0,
+        pageSize: 20,
+        content: [action.payload, ...state.posts.content],
+      }
+    }
   },
 });
 

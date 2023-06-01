@@ -6,6 +6,7 @@ import store from "../redux/store";
 import {groupActions} from "../redux/slices/groupSlice";
 import utils from "../utils/utils";
 import {activeGroupActions} from "../redux/slices/activeGroupSlice";
+import postService from "./post.service";
 
 class CommunityService {
   createCommunity(data: CreateGroupType): Promise<GroupType> {

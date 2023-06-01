@@ -17,6 +17,7 @@
     "axios": "^1.4.0",
     "ckeditor5-custom-build": "file:./ckeditor",
     "cssnano": "^6.0.1",
+    "date-fns": "^2.30.0",
     "formik": "^2.2.9",
     "is-empty": "^1.2.0",
     "react": "^18.2.0",
