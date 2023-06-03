@@ -6,7 +6,6 @@ import store from "../redux/store";
 import {groupActions} from "../redux/slices/groupSlice";
 import utils from "../utils/utils";
 import {activeGroupActions} from "../redux/slices/activeGroupSlice";
-import postService from "./post.service";
 
 class CommunityService {
   createCommunity(data: CreateGroupType): Promise<GroupType> {
@@ -60,7 +59,7 @@ class CommunityService {
     });
   }
 
-  public joinCommunity(groupId: number){
+  public joinCommunity(groupId: number) {
     return new Promise<boolean>((resolve, reject) => {
       apiInstance.post("/member/join", groupId)
         .then((response: AxiosResponse<boolean>) => {
@@ -72,7 +71,7 @@ class CommunityService {
     });
   }
 
-  public leaveCommunity(groupId: number){
+  public leaveCommunity(groupId: number) {
     return new Promise<boolean>((resolve, reject) => {
       apiInstance.post("/member/exit", groupId)
         .then((response: AxiosResponse<boolean>) => {

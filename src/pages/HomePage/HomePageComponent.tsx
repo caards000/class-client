@@ -1,5 +1,4 @@
 import React from 'react';
-import Post from "../../components/Post";
 import Container from "../../components/Container";
 import LeftCol from "./LeftCol";
 

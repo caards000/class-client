@@ -48,7 +48,10 @@ function CreatePost({groupId, replyId}: IProps) {
                 <div>
                   <CKEditor
                     editor={Editor}
-                    config={{placeholder: "Share something..."}}
+                    config={{
+                      placeholder: "Share something...",
+                      removePlugins: ['NumberedList', 'BulletedList']
+                    }}
                     data={field.value}
                     disabled={isSubmitting}
                     onChange={(e, editor) => {

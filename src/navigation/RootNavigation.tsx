@@ -15,7 +15,7 @@ interface IProps {
 }
 
 function RootNavigation(props: IProps) {
-  const interests = ['Software engineering', 'front-end', 'back-end', 'cloud', 'python', 'javascript', 'fullstack', 'datascience', 'web-dev', 'dev-ops', 'maths', 'english', 'further-maths', 'science', 'tech'];
+  // const interests = ['Software engineering', 'front-end', 'back-end', 'cloud', 'python', 'javascript', 'fullstack', 'datascience', 'web-dev', 'dev-ops', 'maths', 'english', 'further-maths', 'science', 'tech'];
   return (
     <BrowserRouter>
       <Routes>

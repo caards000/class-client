@@ -29,11 +29,14 @@ function LeftCol(props: IProps) {
 
   const joinGroup = async () => {
     if (data && !joiningOrExitingGroup) {
+      setJoiningOrExitingGroup(true);
       communityService.joinCommunity(data.id)
         .then(() => {
+          setJoiningOrExitingGroup(false);
           dispatch(activeGroupActions.setIsMember(true));
         })
         .catch(err => {
+          setJoiningOrExitingGroup(false);
           utils.handleRequestError(err);
         });
     }
@@ -41,11 +44,14 @@ function LeftCol(props: IProps) {
 
   const exitGroup = async () => {
     if (data && !joiningOrExitingGroup) {
+      setJoiningOrExitingGroup(true);
       communityService.leaveCommunity(data.id)
         .then(() => {
+          setJoiningOrExitingGroup(false);
           dispatch(activeGroupActions.setIsMember(false));
         })
         .catch(err => {
+          setJoiningOrExitingGroup(false);
           utils.handleRequestError(err);
         });
     }
@@ -121,6 +127,7 @@ function LeftCol(props: IProps) {
               className="w-full"
               outline
               onClick={exitGroup}
+              loading={joiningOrExitingGroup}
             >
               Exit Community
             </Button>

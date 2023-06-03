@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-body > div.ck-body-wrapper, .ck.ck-editor__top {
+body > div.ck-body-wrapper
+//, .ck.ck-editor__top
+{
   display: none !important;
   opacity: 0 !important;
 }
 
 .ck.ck-editor__main > .ck.ck-content {
-  border-top-left-radius: var(--ck-border-radius) !important;
-  border-top-right-radius: var(--ck-border-radius) !important;
+  //border-top-left-radius: var(--ck-border-radius) !important;
+  //border-top-right-radius: var(--ck-border-radius) !important;
   box-shadow: unset !important;
 }
 
@@ -52,6 +54,12 @@ body > div.ck-body-wrapper, .ck.ck-editor__top {
 
   h6 {
     @apply typo-h6;
+  }
+
+  pre > code {
+    @apply rounded max-h-[400px] border border-slate-200 my-3;
+    font-size: 0.85em;
+    line-height: 1.7;
   }
 }
 
