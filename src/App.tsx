@@ -5,9 +5,11 @@ import {PersistGate} from "redux-persist/integration/react";
 import store, {persistor} from "./redux/store";
 import {Provider} from "react-redux";
 import authService from "./services/auth.service";
+import "highlight.js/styles/github.css";
 
 
 function App() {
+
   return (
     <PersistGate
       onBeforeLift={async () => await authService.revalidate()}
