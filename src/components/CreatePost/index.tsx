@@ -4,19 +4,21 @@ import {CKEditor} from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
 import Button from "../Button";
-import {CreatePostType} from "../../types/post.types";
+import {CreatePostType, PostType} from "../../types/post.types";
 import viewToPlainText from '@ckeditor/ckeditor5-clipboard/src/utils/viewtoplaintext';
 import {useAppDispatch} from "../../redux/hooks";
 import postService from "../../services/post.service";
 import {activeGroupActions} from "../../redux/slices/activeGroupSlice";
 import utils from "../../utils/utils";
+import isEmpty from "is-empty";
 
 interface IProps {
   groupId: number;
   replyId?: number;
+  onSuccess?: (e: PostType) => void;
 }
 
-function CreatePost({groupId, replyId}: IProps) {
+function CreatePost({groupId, replyId, onSuccess}: IProps) {
   const dispatch = useAppDispatch();
   const initialValue: CreatePostType = {
     groupId: groupId,
@@ -31,7 +33,11 @@ function CreatePost({groupId, replyId}: IProps) {
       .then(post => {
         helpers.setSubmitting(false);
         helpers.resetForm();
-        dispatch(activeGroupActions.addPost(post))
+        if (isEmpty(onSuccess) || !onSuccess) {
+          dispatch(activeGroupActions.addPost(post))
+        } else {
+          onSuccess && onSuccess(post);
+        }
       })
       .catch((err) => {
         utils.handleRequestError(err, helpers)

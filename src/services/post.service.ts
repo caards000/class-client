@@ -58,6 +58,30 @@ class PostService {
     });
   }
 
+  likePost(postId: number): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      apiInstance.post(`/like/${postId}?status=true`)
+        .then((res) => {
+          resolve(true);
+        })
+        .catch((err) => {
+          reject(err);
+        })
+    })
+  }
+
+  unlikePost(postId: number): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      apiInstance.post(`/like/${postId}?status=false`)
+        .then((res) => {
+          resolve(true);
+        })
+        .catch((err) => {
+          reject(err);
+        })
+    })
+  }
+
 }
 
 const postService = new PostService();

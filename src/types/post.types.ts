@@ -11,10 +11,13 @@ export type CreatePostType = {
 
 export type PostType = {
   id: 0,
+  slug: string,
   content: string,
-  replyTo: PostType,
   author: UserType,
   group: GroupType,
   files: FileType,
-  createdAt: Date
+  createdAt: Date,
+  likes: number,
+  replies: number,
+  liked: boolean,
 }
