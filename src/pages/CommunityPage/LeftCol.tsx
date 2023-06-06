@@ -7,6 +7,7 @@ import Skeleton from "react-loading-skeleton";
 import communityService from "../../services/community.service";
 import utils from "../../utils/utils";
 import {activeGroupActions} from "../../redux/slices/activeGroupSlice";
+import {Link} from "react-router-dom";
 
 interface IProps {
 }
@@ -95,7 +96,11 @@ function LeftCol(props: IProps) {
           className="w-full h-full object-cover object-center"
         />
       </div>
-      <h3>{data?.groupName}</h3>
+      <h3>
+        <Link to={`/community/${data?.slug}`} className="link-reset hover:underline">
+          {data?.groupName}
+        </Link>
+      </h3>
       <div className="flex flex-wrap gap-2 items-center">
         <p className="typo-body-small text-slate-500">676 members</p>
         <div className="w-1 h-1 bg-slate-400 rounded-full"/>
