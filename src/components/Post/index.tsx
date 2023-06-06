@@ -6,7 +6,7 @@ import {Icon} from '@iconify/react';
 import Button from "../Button";
 import hljs from "highlight.js";
 
-interface IProps extends PostType {
+interface IProps extends PostType{
 }
 
 function Post({author, content, createdAt}: IProps) {

@@ -6,6 +6,7 @@ import Button from "../Button";
 import {Icon} from '@iconify/react';
 import {useAppSelector} from "../../redux/hooks";
 import authService from "../../services/auth.service";
+import SearchBar from "../SearchBar";
 
 interface IProps {
 }
@@ -26,6 +27,7 @@ function Header(props: IProps) {
 
           <div>
             <ul className="flex h-full items-center gap-3">
+              <SearchBar/>
               {
                 isAuthenticated ? (
                   <>
