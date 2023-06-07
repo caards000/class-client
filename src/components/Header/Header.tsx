@@ -32,7 +32,7 @@ function Header(props: IProps) {
                 isAuthenticated ? (
                   <>
                     <li>
-                      <Link to="">
+                      <Link to="/profile">
                         <img src={images.UserProfilePicture} alt=" "
                              className="w-8 aspect-square rounded"/>
                       </Link>

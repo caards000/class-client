@@ -1,9 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ITokenResponse} from "../../types/auth.types";
+import {ITokenResponse, UserType} from "../../types/auth.types";
 
 export interface IAuthSlice {
   isAuthenticated: boolean;
   tokens?: ITokenResponse;
+  user?: UserType;
 }
 
 const initialState: IAuthSlice = {
@@ -21,7 +22,11 @@ const authSlice = createSlice({
     logout: (state) => {
       state.isAuthenticated = false;
       state.tokens = undefined;
+      state.user = undefined;
     },
+    setUserDetails: (state, action: PayloadAction<UserType>) => {
+      state.user = action.payload;
+    }
   }
 });
 

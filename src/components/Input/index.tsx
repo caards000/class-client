@@ -42,7 +42,7 @@ function Input({label, error, className, disabled, type:inputType, ...props}: IP
               }
           </div>
           {!isEmpty(error) && (
-              <p className="text-red-500 typo-caption">{error}</p>
+              <p className="text-red-500 typo-caption mt-1">{error}</p>
           )}
 
       </label>

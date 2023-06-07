@@ -56,3 +56,8 @@ export type UserType = {
   email: string,
   isEnabled: boolean
 }
+
+export type UpdateUserDetailsRequest = {
+  fullName: string,
+  username: string,
+}
