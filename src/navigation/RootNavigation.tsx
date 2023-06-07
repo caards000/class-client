@@ -10,8 +10,10 @@ import ResetPasswordPage from "../pages/ResetPasswordPage";
 import SetNewPasswordPage from "../pages/SetNewPasswordPage";
 import Layout from "../components/Layout/Layout";
 import CommunityPage from "../pages/CommunityPage";
+import SearchResultPage from "../pages/SearchResultPage";
 import AllCommunityPosts from "../pages/CommunityPage/AllCommunityPosts";
 import SinglePostPage from "../pages/SinglePostPage";
+
 
 interface IProps {
 }
@@ -30,6 +32,9 @@ function RootNavigation(props: IProps) {
               <Route path="" element={<AllCommunityPosts/>}/>
               <Route path="p/:postSlug" element={<SinglePostPage/>}/>
             </Route>
+          </Route>
+          <Route path="search" element={<SearchResultPage/>}>
+
           </Route>
         </Route>
         <Route element={<AuthLayout/>}>

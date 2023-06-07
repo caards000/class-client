@@ -8,8 +8,10 @@ import postService from "../../services/post.service";
 import Avvvatars from "avvvatars-react";
 import {useNavigate} from "react-router-dom";
 
+
 interface IProps extends PostType {
   full?: boolean;
+
 }
 
 function Post({
