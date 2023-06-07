@@ -14,6 +14,7 @@ import SearchResultPage from "../pages/SearchResultPage";
 import AllCommunityPosts from "../pages/CommunityPage/AllCommunityPosts";
 import SinglePostPage from "../pages/SinglePostPage";
 import ProfilePage from "../pages/ProfilePage";
+import RecommendCommunityPage from "../pages/RecommendCommunityPage";
 
 
 interface IProps {
@@ -29,6 +30,7 @@ function RootNavigation(props: IProps) {
 
           <Route path="community">
             <Route path="create" element={<CreateCommunity/>}/>
+            <Route path="recommend" element={<RecommendCommunityPage/>}/>
             <Route path=":slug" element={<CommunityPage/>}>
               <Route path="" element={<AllCommunityPosts/>}/>
               <Route path="p/:postSlug" element={<SinglePostPage/>}/>
