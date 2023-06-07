@@ -7,7 +7,7 @@ import {
   ISetNewPasswordResponse,
   ISignUpRequest,
   ITokenResponse,
-  NextAuthStep
+  NextAuthStep, UpdateUserDetailsRequest, UserType
 } from "../types/auth.types";
 import apiInstance, {setAuthToken} from "./api";
 import {AxiosResponse} from "axios";
@@ -33,8 +33,8 @@ class AuthService {
   public async signup(data: ISignUpRequest): Promise<ITokenResponse> {
     return new Promise((resolve, reject) => {
       apiInstance.post("/auth/signup", data)
-        .then((response: AxiosResponse<ITokenResponse>) => {
-            this.performLogin(response.data);
+        .then(async (response: AxiosResponse<ITokenResponse>) => {
+            await this.performLogin(response.data);
             return resolve(response.data);
           }
         )
@@ -47,8 +47,36 @@ class AuthService {
   public async login(data: ILoginRequest): Promise<ITokenResponse> {
     return new Promise((resolve, reject) => {
       apiInstance.post("/auth/login", data)
-        .then((response: AxiosResponse<ITokenResponse>) => {
-            this.performLogin(response.data);
+        .then(async (response: AxiosResponse<ITokenResponse>) => {
+            await this.performLogin(response.data);
+            return resolve(response.data);
+          }
+        )
+        .catch((err) => {
+          return reject(err);
+        });
+    });
+  }
+
+  public async getUserDetails(): Promise<UserType> {
+    return new Promise((resolve, reject) => {
+      apiInstance.get("/auth")
+        .then((response: AxiosResponse<UserType>) => {
+            store.dispatch(authActions.setUserDetails(response.data))
+            return resolve(response.data);
+          }
+        )
+        .catch((err) => {
+          return reject(err);
+        });
+    });
+  }
+
+  public async updateUserDetails(data: UpdateUserDetailsRequest): Promise<UserType> {
+    return new Promise((resolve, reject) => {
+      apiInstance.put("/auth", data)
+        .then((response: AxiosResponse<UserType>) => {
+            store.dispatch(authActions.setUserDetails(response.data))
             return resolve(response.data);
           }
         )
@@ -91,15 +119,16 @@ class AuthService {
 
   public async revalidate() {
     const tokens: ITokenResponse = store.getState().auth.tokens;
-    this.performLogin(tokens);
+    await this.performLogin(tokens);
   }
 
-  private performLogin(tokens: ITokenResponse) {
+  private async performLogin(tokens: ITokenResponse) {
     if (tokens?.accessToken) {
       store.dispatch(authActions.login(tokens));
       setAuthToken(tokens?.accessToken ? `Bearer ${tokens?.accessToken}` : undefined);
 
       // init actions
+      await this.getUserDetails();
       communityService.getUserCommunities();
     } else {
       this.logout();

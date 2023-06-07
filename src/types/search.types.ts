@@ -1,3 +1,3 @@
-export type SearchForGroupType ={
-    name: string
+export type SearchType ={
+    query: string
 }

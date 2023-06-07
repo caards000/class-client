@@ -54,7 +54,7 @@ function Post({
 
   return (
     <div
-      className={`flex justify-center gap-4 ${!full ? `bg-slate-50 p-4 rounded border border-transparent hover:border-slate-200 shadow` : ``}`}>
+      className={`flex justify-center gap-4 post ${!full ? `bg-slate-50 p-4 rounded border border-transparent hover:border-slate-200 shadow` : ``}`}>
       {/*<div className="w-10 h-10 rounded-full overflow-hidden">*/}
       {/*  <img className="w-full h-full object-cover"*/}
       {/*       src={author.profileImage || images.UserProfilePicture} alt=""/>*/}

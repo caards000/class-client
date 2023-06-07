@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import Header from "../Header/Header";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useAppSelector} from "../../redux/hooks";
-import SearchBar from "../SearchBar";
 
 interface IProps {
 }

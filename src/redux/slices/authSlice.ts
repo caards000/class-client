@@ -1,13 +1,17 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ITokenResponse} from "../../types/auth.types";
+import {ITokenResponse, UserType} from "../../types/auth.types";
+import {IInterest} from "../../types/interest.types";
 
 export interface IAuthSlice {
   isAuthenticated: boolean;
   tokens?: ITokenResponse;
+  user?: UserType;
+  interests: IInterest[];
 }
 
 const initialState: IAuthSlice = {
   isAuthenticated: false,
+  interests: [],
 }
 
 const authSlice = createSlice({
@@ -21,7 +25,15 @@ const authSlice = createSlice({
     logout: (state) => {
       state.isAuthenticated = false;
       state.tokens = undefined;
+      state.user = undefined;
+      state.interests = [];
     },
+    setUserDetails: (state, action: PayloadAction<UserType>) => {
+      state.user = action.payload;
+    },
+    setUserInterests: (state, action: PayloadAction<IInterest[]>) => {
+      state.interests = action.payload;
+    }
   }
 });
 
